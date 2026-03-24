@@ -155,7 +155,7 @@ export default function CloudServices() {
     ];
 
     return (
-        <main className="relative bg-white min-h-screen font-sans">
+        <main className="relative bg-white min-h-screen font-sans overflow-x-hidden">
             <Navbar />
 
             {/* Hero Section */}

@@ -24,15 +24,15 @@ function FeatureCard({
   return (
     <div
       {...motion}
-      className={cardClassName}
+      className={`min-w-0 ${cardClassName}`}
     >
       <div className={iconWrapperClassName}>
         {icon}
       </div>
-      <h3 className={titleClassName}>
+      <h3 className={`break-words [overflow-wrap:anywhere] ${titleClassName}`}>
         {title}
       </h3>
-      <p className={descriptionClassName}>
+      <p className={`break-words [overflow-wrap:anywhere] ${descriptionClassName}`}>
         {description}
       </p>
     </div>
