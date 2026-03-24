@@ -4,9 +4,15 @@ import Navbar from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Contact from "@/components/sections/Contact";
 import FeatureCard from "@/components/sections/cloud-services/FeatureCard";
+import FAQSection from "@/components/sections/FAQSection";
 import { useTranslations } from "next-intl";
 import { motionConfig, withDelay } from "@/lib/motion";
 import { useEffect } from "react";
+
+type FaqItem = {
+    question: string;
+    answer: string;
+};
 
 export default function CloudServices() {
     const t = useTranslations('pages.cloudServices');
@@ -153,6 +159,8 @@ export default function CloudServices() {
             iconWrapperClassName: "w-16 h-16 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform"
         }
     ];
+
+    const faqItems = t.raw('faq.items') as FaqItem[];
 
     return (
         <main className="relative bg-white min-h-screen font-sans overflow-x-hidden">
@@ -305,7 +313,7 @@ export default function CloudServices() {
                                 description={item.desc}
                                 icon={item.icon}
                                 motion={withDelay(motionConfig.scaleIn, index * 0.1)}
-                                cardClassName="max-w-sm md:max-w-md lg:max-w-lg p-4 md:p-6 lg:p-8 rounded-3xl bg-white border border-sky-blue/10 text-center transition-all hover:shadow-xl group"
+                                cardClassName="p-4 md:p-6 lg:p-8 rounded-3xl bg-white border border-sky-blue/10 text-center transition-all hover:shadow-xl group"
                                 iconWrapperClassName={item.iconWrapperClassName}
                                 titleClassName="text-lg font-bold text-navy-blue mb-4"
                                 descriptionClassName="text-neutral-gray text-sm leading-relaxed"
@@ -316,22 +324,14 @@ export default function CloudServices() {
             </section>
 
             {/* FAQ Section */}
-            <section className="py-24 bg-white" id="faq">
-                <div className="max-w-4xl mx-auto px-6 lg:px-8">
-                    <div className="text-center mb-16" {...motionConfig.fadeIn}>
-                        <h2 className="font-display text-4xl lg:text-5xl text-navy-blue mb-6">{t('faq.title')}</h2>
-                    </div>
-
-                    <div className="space-y-6">
-                        {(t.raw('faq.items') as any[]).map((item, index) => (
-                            <div key={index} {...withDelay(motionConfig.slideUp, index * 0.1)} className="bg-slate-50 p-8 rounded-3xl border border-sky-blue/10 hover:bg-white hover:shadow-lg transition-all duration-300">
-                                <h3 className="text-lg font-bold text-navy-blue mb-3">{item.question}</h3>
-                                <p className="text-neutral-gray leading-relaxed">{item.answer}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <FAQSection
+                title={t('faq.title')}
+                items={faqItems}
+                headerMotionProps={motionConfig.fadeIn}
+                itemMotion={(index) => withDelay(motionConfig.slideUp, index * 0.1)}
+                itemClassName="bg-slate-50 p-8 rounded-3xl border border-sky-blue/10 hover:bg-white hover:shadow-lg transition-all duration-300"
+                questionClassName="text-lg font-bold text-navy-blue mb-3"
+            />
 
             {/* Contact Section */}
             <Contact />
