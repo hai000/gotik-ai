@@ -47,7 +47,7 @@ export default function AIConsulting() {
 
             {/* Hero Section */}
             <section className="pt-32 lg:pt-40 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-                <div className="ac-hero-1 absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+                <div className="ac-hero-1 absolute top-0 right-0 -mr-20 -mt-20 max-w-80 md:max-w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
                 <div className="ac-hero-2 absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-navy-blue/5 rounded-full blur-3xl"></div>
 
                 <div className="ac-hero-3 max-w-7xl mx-auto px-6 lg:px-8 relative z-10">

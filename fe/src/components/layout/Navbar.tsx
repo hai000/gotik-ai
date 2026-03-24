@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
+import { useIsMobile } from "@/hooks/useMobile";
+import { cn } from "@/lib/utils";
 
 
 export default function Navbar() {
@@ -12,7 +14,7 @@ export default function Navbar() {
     const locale = useLocale();
     const pathname = usePathname();
     const isLandingPage = pathname === '/' || pathname === `/${locale}` || pathname === `/${locale}/`;
-
+    const isMobile = useIsMobile();
     // Move solutionsMenu inside component to use translations
     const solutionsMenu = [
         { name: tServices('softwareEngineering'), href: "/software-engineer" },
@@ -59,7 +61,7 @@ export default function Navbar() {
             <nav
                 className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 py-6 px-6 md:px-12 flex items-center justify-between ${isScrolled
                     ? "bg-navy-blue/90 backdrop-blur-xl text-white shadow-lg"
-                    : "text-black"
+                    : cn(isMobile ? "bg-navy-blue/90 backdrop-blur-xl text-white shadow-lg" : "text-black")
                     }`}
             >
                 <div className="flex items-center gap-12">
@@ -135,9 +137,9 @@ export default function Navbar() {
 
             {/* Mobile Menu Overlay */}
             <div
-                className={`fixed top-0 left-0 w-full h-full bg-navy-blue z-[9999] flex flex-col justify-center items-center transition-transform duration-500 md:hidden ${isMenuOpen ? "translate-y-0" : "-translate-y-full"
+                className={`fixed top-0 left-0 w-full h-full bg-navy-blue z-9999 flex flex-col justify-center items-center transition-transform duration-500 md:hidden ${isMenuOpen ? "translate-y-0" : "-translate-y-full"
                     }`}
-                style={!isLandingPage ? { left: '-65px' } : {}}
+                style={!isLandingPage && !isMobile ? { left: '-65px' } : {}}
             >
                 <button
                     onClick={toggleMenu}
