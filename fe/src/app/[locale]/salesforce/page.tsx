@@ -24,8 +24,10 @@ import { useTranslations } from 'next-intl';
 import Navbar from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Contact from "@/components/sections/Contact";
+import { useIsMobile } from '@/hooks/useMobile';
 
 const SalesforcePage = () => {
+    const isMobile = useIsMobile();
     const t = useTranslations('pages.salesforce');
     const controls = useAnimation();
     const ref = useRef(null);
@@ -59,8 +61,10 @@ const SalesforcePage = () => {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="pt-32 lg:pt-40 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-50/50 skew-x-12 translate-x-1/4 -z-10" />
+            <section className="pt-32 lg:pt-40 w-full overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+                {!isMobile && (
+                    <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-50/50 skew-x-12 translate-x-1/4 -z-10" />
+                )}
                 <div className="container px-4 mx-auto">
                     <div className="flex flex-col lg:flex-row items-center gap-12">
                         <motion.div
